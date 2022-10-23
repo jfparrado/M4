@@ -11,7 +11,15 @@ export default function CreateRecipe(){
     const allDishes = ['breakfast', 'brunch', 'dinner', 'lunch', 'main course', 'main dish', 'morning meal', 'salad', 'side dish', 'soup']
 
     const diets=useSelector((state)=>state.diets)
-    const [errors,setErrors]=useState({}) //aca se crean los posibles errores
+    const [errors,setErrors]=useState({
+        name:`Se requiere name`,
+        summary:"Se requiere summary ",
+        healthScore:"Se requiere healthScore",
+        steps:"Se requiere steps",
+        image:"Se requiere image",
+        dishTypes:"Se requiere dishtypes",
+        diets:"Se requiere diets",
+    }) //aca se crean los posibles errores
     const [input,setInput]=useState({
         name:"",
         summary:"",
@@ -51,6 +59,7 @@ export default function CreateRecipe(){
         )
         console.log(input);
     }
+
     function handleCheck(event){
         if(event.target.checked){
             setInput({
@@ -65,6 +74,7 @@ export default function CreateRecipe(){
             })
         }
     }
+    
     function handleSubmit(event){
         event.preventDefault();
         try {
@@ -133,6 +143,7 @@ export default function CreateRecipe(){
                 {allDishes?.map((dish)=>(
                 <label><input type="checkbox" name="dishTypes" value={dish} onChange={(event)=>handleCheck(event)} />{dish}</label>
                 ))}
+                
             </div>
 
             <label htmlFor="diets">Diets</label>
@@ -140,12 +151,9 @@ export default function CreateRecipe(){
                 {diets?.map((diet)=>(
                     <label><input type="checkbox" name="diets" value={diet.name} onChange={(event)=>handleCheck(event)} />{diet.name}</label>
                 ))}
+                
             </div>
-            {/* <select name="diets" onChange={(event)=>handleSelect(event)}>
-                {diets?.map((diet)=>(
-                    <option value={diet.name} id={diet.name}>{diet.name}</option>
-                ))}
-            </select> */}
+
             <div>
                 <button type="submit" >Add recipe</button>
             </div>
