@@ -11,5 +11,5 @@ article{
     border-radius: 1rem;
     margin: 2rem 3rem;
     width: 40vw;
-    height: 63vh;
+    height: fit-content;
 }

@@ -1,11 +1,11 @@
 //aca no puede haber nada asincrono
 import {
   GET_ALL_RECIPES,
-  GET_RECIPIES_BY_ID,
+  GET_RECIPES_BY_ID,
   GET_DIETS_BY_NAME,
-  GET_RECIPIES_BY_DIET,
+  GET_RECIPES_BY_DIET,
   RECIPES_ORDER_BY_NAME,
-  GET_RECIPIES_BY_NAME,
+  GET_RECIPES_BY_NAME,
   // POST_DIET,
   POST_RECIPE,
   GET_ALL_DIETS,
@@ -13,6 +13,7 @@ import {
 const initialState = {
   allRecipes: [], //esto es para que al filtrar no se hagan filtros sobre los filtros. siempre sobre todas las recetas
   recipes: [],
+  recipeDetail: [],
   diets: [],
 };
 export default function rootReducer(state = initialState, action) {
@@ -24,10 +25,11 @@ export default function rootReducer(state = initialState, action) {
         allRecipes: action.payload,
       };
 
-    case GET_RECIPIES_BY_ID:
+    case GET_RECIPES_BY_ID:
+      console.log("estoy en reducers");
       return {
         ...state,
-        recipes: action.payload,
+        recipeDetail: action.payload,
       };
 
     case RECIPES_ORDER_BY_NAME:
@@ -92,7 +94,7 @@ export default function rootReducer(state = initialState, action) {
         diets: action.payload,
       };
 
-    case GET_RECIPIES_BY_DIET:
+    case GET_RECIPES_BY_DIET:
       const allRecipes = state.allRecipes;
       const recipesByDiet =
         action.payload === "All" //si se ecogen todas
@@ -107,7 +109,7 @@ export default function rootReducer(state = initialState, action) {
         recipes: recipesByDiet,
       };
 
-    case GET_RECIPIES_BY_NAME:
+    case GET_RECIPES_BY_NAME:
       return {
         ...state,
         recipes: action.payload,

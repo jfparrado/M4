@@ -50,12 +50,12 @@ export default function Home(){//props recibe la info que le llegue y se usa pro
     return(
         <div>
             <Paginado recipesPerPage={recipesPerPage} numberOfRecipes={allRecipes.length} paginado={funcPaginado}/>
-            <select  onChange={(e)=>handleOrderer(e)}>
+            <select  onChange={(event)=>handleOrderer(event)}>
                 <option value="asc">Ascendent</option>
                 <option value="desc">Descendent</option>
                 <option value="health">Health Score</option>
             </select>
-            <select onChange={(e)=>handleFilter(e)}>
+            <select onChange={(event)=>handleFilter(event)}>
                 <option value="All">All</option>
                 {arrDiets?.map((diet)=>{ //que muestre unicamente las recetas dentro de esta pagina
                     return (

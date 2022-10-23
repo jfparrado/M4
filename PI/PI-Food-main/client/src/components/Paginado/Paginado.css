@@ -3,15 +3,17 @@
     background-color: #A8E890;
     justify-self: center;
     width: max-content;
-    padding-left: 1rem;
-    padding-right: 1rem;
-    padding-top: 0.2rem;
-    padding-bottom: 0.2rem;
+    padding: 0%;
 }
 .pagenumber{
     display: flex;
     justify-items: center;
-margin: auto 1rem;
+    margin: 0%;
+    border: 0.1rem solid black;
+    padding: 0.2rem 1rem;
+}
+.pagenumber:hover{
+    cursor: pointer
 }
 nav{
     display: flex;

@@ -1,8 +1,8 @@
 import axios from "axios";
-export const GET_ALL_RECIPES = "GET_ALL_RECIPIES";
-export const GET_RECIPIES_BY_ID = "GET_RECIPIES_BY_ID";
-export const GET_RECIPIES_BY_DIET = "GET_RECIPIES_BY_DIET";
-export const GET_RECIPIES_BY_NAME = "GET_RECIPIES_BY_NAME";
+export const GET_ALL_RECIPES = "GET_ALL_RECIPES";
+export const GET_RECIPES_BY_ID = "GET_RECIPES_BY_ID";
+export const GET_RECIPES_BY_DIET = "GET_RECIPES_BY_DIET";
+export const GET_RECIPES_BY_NAME = "GET_RECIPES_BY_NAME";
 export const POST_RECIPE = "POST_RECIPE";
 export const GET_ALL_DIETS = "GET_ALL_DIETS";
 export const GET_DIETS_BY_NAME = "GET_DIETS_BY_NAME";
@@ -23,11 +23,12 @@ export function getAllRecipes() {
   };
 }
 export function getRecipesById(id) {
+  // console.log("el id es:", id);
   return async function (dispatch) {
     try {
       const oneRecipe = await axios.get(`http://localhost:3001/recipes/${id}`);
       return dispatch({
-        type: GET_RECIPIES_BY_ID,
+        type: GET_RECIPES_BY_ID,
         payload: oneRecipe.data,
       });
     } catch (error) {
@@ -37,7 +38,7 @@ export function getRecipesById(id) {
 }
 export function getRecipesByDiet(dietName) {
   return {
-    type: GET_RECIPIES_BY_DIET,
+    type: GET_RECIPES_BY_DIET,
     payload: dietName,
   };
 }
@@ -48,7 +49,7 @@ export function getRecipesByName(recipeName) {
         `http://localhost:3001/recipes?name=${recipeName}`
       );
       return dispatch({
-        type: GET_RECIPIES_BY_NAME,
+        type: GET_RECIPES_BY_NAME,
         payload: recipesSameName.data,
       });
     } catch (error) {

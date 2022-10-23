@@ -17,8 +17,8 @@ export default function CreateRecipe(){
         healthScore:"Se requiere healthScore",
         steps:"Se requiere steps",
         image:"Se requiere image",
-        dishTypes:"Se requiere dishtypes",
-        diets:"Se requiere diets",
+        dishTypes:"",
+        diets:"",
     }) //aca se crean los posibles errores
     const [input,setInput]=useState({
         name:"",
@@ -34,15 +34,12 @@ export default function CreateRecipe(){
     },[dispatch])
 
     function validate(input){ //aca entra todo el estado input
-        console.log("el input es:", input);
         let errors={}
         for(let propiedad in input){
-            console.log("la propiedad es:", propiedad);
             if (!input[propiedad]){
                 errors[propiedad]=`Se requiere ${propiedad}`;
             }
         }
-        console.log("los erroes son:", errors);
         return errors
     }
 
@@ -57,7 +54,6 @@ export default function CreateRecipe(){
             [event.target.name]: event.target.value
             })
         )
-        console.log(input);
     }
 
     function handleCheck(event){
@@ -155,7 +151,10 @@ export default function CreateRecipe(){
             </div>
 
             <div>
+                {Object.keys(errors).length!==0 ? 
+                <button type="submit" disabled >Add recipe</button>:
                 <button type="submit" >Add recipe</button>
+                }
             </div>
         </form>
     )
