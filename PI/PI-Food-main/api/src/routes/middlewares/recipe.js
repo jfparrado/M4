@@ -55,7 +55,7 @@ router.post("/", async (req, res) => {
       return res.status(404).send("Falta enviar datos obligatorios");
     }
     const dietInfo = await Diet.findAll({
-      where: { name: diets },
+      where: { name: diets }, //busca todas las dietas donde el nombre coincida con lo traido por el body
     });
     const newRecipe = await Recipe.create(cuerpo);
     newRecipe.addDiet(dietInfo);
