@@ -33,6 +33,10 @@ module.exports = (sequelize) => {
       dishTypes: {
         type: DataTypes.ARRAY(DataTypes.STRING), //asi se usan los arrays. especificando que va dentro del array
       },
+      createdInDb: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true,
+      },
     },
     {
       createdAt: false,

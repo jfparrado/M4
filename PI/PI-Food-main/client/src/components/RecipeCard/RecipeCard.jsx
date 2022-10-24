@@ -2,7 +2,7 @@ import React from "react";
 import {Link} from "react-router-dom"
 import style from "./RecipeCard.module.css";
 
-export default function RecipeCard({id, name, image, diets}){
+export default function RecipeCard({id, name, image, diets,createdInDb}){
     let i=0;
     return(
         <section>
@@ -15,27 +15,9 @@ export default function RecipeCard({id, name, image, diets}){
             <p className={style.dietas}>
             {diets?.map(diet => {
                 i++;
-                if(i===diets.length){
-                    if(typeof diet === 'string'){
-                        return(
-                            `${diet}.`
-                        )
-                    }else{
-                        return(
-                            `${diet["name"]}.`
-                        )
-                    }
-                }else{
-                    if(typeof diet === 'string'){
-                        return(
-                            `${diet}, `
-                        )
-                    }else{
-                            return(
-                                `${diet["name"]}, `
-                                )
-                    }
-                }
+                return i===diets.length?//esto es solo para que el ultimo valor no sea , sino .
+                createdInDb === true? `${diet["name"]}.`:`${diet}.`:
+                createdInDb === true? `${diet["name"]}, `:`${diet}, `
             })
             }
             </p>

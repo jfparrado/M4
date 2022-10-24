@@ -3,10 +3,11 @@ import {useState} from "react";
 import {useDispatch} from "react-redux"; 
 import { getRecipesByName } from "../../actions";
 import style from "./SearchBar.module.css"
+import {useHistory} from "react-router-dom"
 
 export default function SearchBar(){
     const dispatch =useDispatch()
-    console.log(dispatch)
+    const history=useHistory();
     const [name,setName]=useState("")
 
     function handleInputChange(event){
@@ -15,6 +16,7 @@ export default function SearchBar(){
     }
     function handleClick(event){
         event.preventDefault();
+        history.push("/home")
         dispatch(getRecipesByName(name))
         setName("")
     }

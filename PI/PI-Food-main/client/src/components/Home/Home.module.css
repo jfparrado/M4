@@ -12,6 +12,7 @@ article{
     margin: 2rem 3rem;
     width: 40vw;
     height: fit-content;
+    background-color: rgba(98, 112, 102, 0.411);
 }
 .containerImg{
     display: flex;
@@ -30,3 +31,4 @@ article{
     width: 7%;
     height: 15%;
 }
+a:link { text-decoration: none; }

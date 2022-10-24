@@ -77,6 +77,7 @@ export default function Home(){//props recibe la info que le llegue y se usa pro
                                 name={recipe.name}
                                 image={recipe.image?recipe.image:"https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"}//si hay imagen que la mande, sino que mande una imagen por default
                                 diets={recipe.diets}
+                                createdInDb={recipe.createdInDb}
                                 />
                             </div>
                         )
