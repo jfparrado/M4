@@ -2,6 +2,8 @@ import React from "react";
 import {useState} from "react";
 import {useDispatch} from "react-redux"; 
 import { getRecipesByName } from "../../actions";
+import style from "./SearchBar.module.css"
+
 export default function SearchBar(){
     const dispatch =useDispatch()
     console.log(dispatch)
@@ -14,11 +16,12 @@ export default function SearchBar(){
     function handleClick(event){
         event.preventDefault();
         dispatch(getRecipesByName(name))
+        setName("")
     }
     
     return(
-        <div>
-            <input type="text" placeholder="Recipe" id="searchbox" onChange={(event)=>handleInputChange(event)} />
+        <div className={style.container}>
+            <input type="text" placeholder="Recipe" className={style.searchbox} value={name} onChange={(event)=>handleInputChange(event)} />
             <button type="submit" onClick={(event)=>{handleClick(event)}}>Search</button>
         </div>
     )

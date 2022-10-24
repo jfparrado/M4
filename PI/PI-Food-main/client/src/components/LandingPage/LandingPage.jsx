@@ -1,16 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./LandingPage.css";
+import style from "./LandingPage.module.css";
 
 
 export default function LandingPage(){
     return(
-        <div id="Landingpage">
+        <div className={style.Landingpage} >
             <h1>
             Check all our recipies
             </h1>
-            <button>
-            <Link to="/home">
+            <button className={style.circle}>
+            <Link to="/home" className={style.text}>
                 HOME
             </Link>
             </button>

@@ -47,7 +47,6 @@ router.get("/", async (req, res) => {
 });
 router.post("/", async (req, res) => {
   try {
-    console.log("estamos en api");
     const { id, name, summary, healthScore, steps, image, dishTypes, diets } =
       req.body;
     const cuerpo = { id, name, summary, healthScore, steps, image, dishTypes };

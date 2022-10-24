@@ -1,0 +1,40 @@
+.title{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.container{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.titleInput{
+    margin-left: 60%;
+    display: flex;
+}
+.errors{
+    margin-left: 0%;
+    display: flex;
+    color:red;
+    font-size: 0.7rem;
+}
+.input{
+    margin-left: 1rem;
+}
+.inputArray{
+    margin-left: 30%;
+    display: flex;
+}
+.arrays{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 0px;
+    margin-left: 20%;
+    margin-right: 20%;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+.mainContainer{
+    padding-top: 60px;
+}

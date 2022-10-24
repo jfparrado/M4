@@ -3,7 +3,7 @@ import{ useState, useEffect }from "react";
 import {useHistory} from "react-router-dom"
 import { postRecipe, getAllDiets} from "../../actions";
 import {useDispatch, useSelector} from "react-redux";
-
+import style from "./CreateRecipes.module.css";
 
 export default function CreateRecipe(){
     const dispatch=useDispatch();
@@ -92,60 +92,60 @@ export default function CreateRecipe(){
         
     }
     return(
-        <form onSubmit={(event)=>handleSubmit(event)}>
-            <h1>Create a new recipe</h1>
-            <div>
-            <label htmlFor="name">Name</label>
-            <input type='text' name='name' id="name"  value={input.name} onChange={(event)=>handleChange(event)}/>
-            {errors.name&&(
-            <p className="errors">{errors.name}</p>
-            )}
+        <form className={style.mainContainer} onSubmit={(event)=>handleSubmit(event)}>
+            <h3>Create a new recipe</h3>
+            <div className={style.container}>
+                <label htmlFor="name" className={style.titleInput}>Name*: </label>
+                <input className={style.input} type='text' placeholder="Pepito Perez" name='name' id="name"  value={input.name} onChange={(event)=>handleChange(event)} required/>
+                {errors.name&&(
+                <p className={style.errors}>{errors.name}</p>
+                )}
             </div>
 
-            <div>
-            <label htmlFor="summary">Summary</label>
-            <input type='text' name='summary' id="summary" value={input.summary} onChange={(event)=>handleChange(event)}/>
-            {errors.summary&&(
-            <p className="errors">{errors.summary}</p>
-            )}
+            <div className={style.container}>
+                <label htmlFor="summary" className={style.titleInput}>Summary*: </label>
+                <input className={style.input} type='text' placeholder="A salad with tomatos" name='summary' id="summary" value={input.summary} onChange={(event)=>handleChange(event)} required/>
+                {errors.summary&&(
+                <p className={style.errors}>{errors.summary}</p>
+                )}
             </div>
 
-            <div>
-            <label htmlFor="healthScore">Health score</label>
-            <input type='text' name='healthScore' id="healthScore" value={input.healthScore} onChange={(event)=>handleChange(event)} />
-            {errors.healthScore&&(
-            <p className="errors">{errors.healthScore}</p>
-            )}
+            <div className={style.container}>
+                <label htmlFor="healthScore" className={style.titleInput}>Health score*: </label>
+                <input className={style.input} type='number' name='healthScore' placeholder="1"id="healthScore" min="0" max="100" value={input.healthScore} onChange={(event)=>handleChange(event)} required/>
+                {errors.healthScore&&(
+                <p className={style.errors}>{errors.healthScore}</p>
+                )}
             </div>
 
-            <div>
-            <label htmlFor="steps">Step by step</label>
-            <input type='text' name='steps' id="steps" value={input.steps} onChange={(event)=>handleChange(event)}/>
-            {errors.steps&&(
-            <p className="errors">{errors.steps}</p>
-            )}
+            <div className={style.container}>
+                <label htmlFor="steps" className={style.titleInput}>Step by step*: </label>
+                <input className={style.input} type='text' name='steps' placeholder="Step 1: Put the" id="steps" value={input.steps} onChange={(event)=>handleChange(event)} required/>
+                {errors.steps&&(
+                <p className={style.errors}>{errors.steps}</p>
+                )}
             </div>
 
-            <div>
-            <label htmlFor="image">Image</label>
-            <input type='text' name='image' id="image" value={input.image} onChange={(event)=>handleChange(event)}/>
-            {errors.image&&(
-            <p className="errors">{errors.image}</p>
-            )}
+            <div className={style.container}>
+                <label htmlFor="image" className={style.titleInput}>Image*: </label>
+                <input className={style.input} type="url" placeholder="https://example.com/example.jpg" pattern="https://.*" name='image' id="image" value={input.image} onChange={(event)=>handleChange(event)} required/>
+                {errors.image&&(
+                <p className={style.errors}>{errors.image}</p>
+                )}
             </div>
 
-            <label> Dishes</label>
-            <div>
+            <div className={style.title}> <h4 >Dishes</h4> </div>
+            <div className={style.arrays}>
                 {allDishes?.map((dish)=>(
-                <label><input type="checkbox" name="dishTypes" value={dish} onChange={(event)=>handleCheck(event)} />{dish}</label>
+                <label className={style.inputArray}><input type="radio" name="dishTypes" value={dish} onChange={(event)=>handleCheck(event)} />{dish}</label>
                 ))}
                 
             </div>
 
-            <label htmlFor="diets">Diets</label>
-            <div>
+            <div className={style.title}> <h4>Diets</h4> </div>
+            <div className={style.arrays}>
                 {diets?.map((diet)=>(
-                    <label><input type="checkbox" name="diets" value={diet.name} onChange={(event)=>handleCheck(event)} />{diet.name}</label>
+                    <label className={style.inputArray}><input type="radio" name="diets" value={diet.name} onChange={(event)=>handleCheck(event)} />{diet.name}</label>
                 ))}
                 
             </div>

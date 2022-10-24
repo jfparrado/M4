@@ -1,18 +1,18 @@
 import React from "react";
 import {Link} from "react-router-dom"
-import "./RecipeCard.css";
+import style from "./RecipeCard.module.css";
 
 export default function RecipeCard({id, name, image, diets}){
     let i=0;
     return(
         <section>
-            <h2 className="titlecard">
-                <Link  to={`/home/${id}` }> 
+            <h3 className={style.titlecard}>
+                <Link className={style.title} to={`/home/${id}` }> 
                 {name} 
                 </Link>
-            </h2>
+            </h3>
             <b>Diets:</b> 
-            <p className="dietas">
+            <p className={style.dietas}>
             {diets?.map(diet => {
                 i++;
                 if(i===diets.length){
@@ -39,7 +39,7 @@ export default function RecipeCard({id, name, image, diets}){
             })
             }
             </p>
-            <img src={image} alt="imagen" className="imgcard"/>
+            <img src={image} alt="imagen" className={style.imgcard}/>
         </section>
     )
 }

@@ -1,0 +1,12 @@
+.container{
+    display: flex;
+    width: 30%;
+    margin-right: 0.5rem;
+    justify-content: flex-end;
+}
+.searchbox{
+    border-width: 0.1rem;
+    border-style: solid;
+    border-color:black ;
+    border-radius: 0.5rem;
+}

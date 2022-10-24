@@ -10,7 +10,7 @@ import { getAllRecipes,
     } from "../../actions";
 import Paginado from "../Paginado/Paginado"
 import RecipeCard from "../RecipeCard/RecipeCard"
-import "./Home.css"
+import style from "./Home.module.css"
 
 export default function Home(){//props recibe la info que le llegue y se usa props.info
     const dispatch =useDispatch()
@@ -27,6 +27,7 @@ export default function Home(){//props recibe la info que le llegue y se usa pro
     const indexLastRecipe=currentPage*recipesPerPage;
     const indexFirstRecipe=indexLastRecipe-recipesPerPage;
     const currentRecipies=allRecipes.slice(indexFirstRecipe,indexLastRecipe)
+    const loadingImg="https://zonavalue.com/wp-content/themes/kauplus/img/loading.gif";
     let arrDiets=allDiets?.map((diet)=>{
         return(diet.name)
     })
@@ -48,37 +49,45 @@ export default function Home(){//props recibe la info que le llegue y se usa pro
         setOrder(`Ordenado ${event.target.value}`)
     }
     return(
-        <div>
-            <Paginado recipesPerPage={recipesPerPage} numberOfRecipes={allRecipes.length} paginado={funcPaginado}/>
-            <select  onChange={(event)=>handleOrderer(event)}>
-                <option value="asc">Ascendent</option>
-                <option value="desc">Descendent</option>
-                <option value="health">Health Score</option>
-            </select>
-            <select onChange={(event)=>handleFilter(event)}>
-                <option value="All">All</option>
-                {arrDiets?.map((diet)=>{ //que muestre unicamente las recetas dentro de esta pagina
-                    return (
-                        <option value={diet}>{diet}</option>
-                    )})
-                }
-            </select>
-                <article>
-                {currentRecipies?.map((recipe)=>{ //que muestre unicamente las recetas dentro de esta pagina
-                    return (
-                        <div className="card">
-                            <RecipeCard
-                            key={recipe.id}
-                            id={recipe.id}
-                            name={recipe.name}
-                            image={recipe.image?recipe.image:"https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"}//si hay imagen que la mande, sino que mande una imagen por default
-                            diets={recipe.diets}
-                            />
-                        </div>
-                    )
-                })}
-                </article>
-                <Paginado recipesPerPage={recipesPerPage} numberOfRecipes={allRecipes.length} paginado={funcPaginado}/>
+        <div className={style.mainContainer}>
+            {
+                allRecipes.length>0?
+                <div>
+                    <Paginado recipesPerPage={recipesPerPage} numberOfRecipes={allRecipes.length} paginado={funcPaginado}/>
+                    <select  onChange={(event)=>handleOrderer(event)}>
+                        <option value="asc">Ascendent</option>
+                        <option value="desc">Descendent</option>
+                        <option value="health">Health Score</option>
+                    </select>
+                    <select onChange={(event)=>handleFilter(event)}>
+                    <option value="All">All</option>
+                    {arrDiets?.map((diet)=>{ //que muestre unicamente las recetas dentro de esta pagina
+                        return (
+                            <option value={diet}>{diet}</option>
+                            )})
+                    }
+                    </select>
+                    <article>
+                    {currentRecipies?.map((recipe)=>{ //que muestre unicamente las recetas dentro de esta pagina
+                        return (
+                            <div className={style.card}>
+                                <RecipeCard
+                                key={recipe.id}
+                                id={recipe.id}
+                                name={recipe.name}
+                                image={recipe.image?recipe.image:"https://www.salonlfc.com/wp-content/uploads/2018/01/image-not-found-scaled-1150x647.png"}//si hay imagen que la mande, sino que mande una imagen por default
+                                diets={recipe.diets}
+                                />
+                            </div>
+                        )
+                    })}
+                    </article>
+                    <Paginado recipesPerPage={recipesPerPage} numberOfRecipes={allRecipes.length} paginado={funcPaginado}/>
+                    </div>
+                :<div className={style.containerImg}>
+                    <img src={loadingImg} alt="loading image" className={style.loading}/>
+                </div> 
+            }
         </div>
     )
 }

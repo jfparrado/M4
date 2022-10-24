@@ -1,0 +1,18 @@
+.Landingpage{
+    background-image: url("https://p4.wallpaperbetter.com/wallpaper/546/224/850/amuse-gueule-appetizer-bamboo-mat-ceramic-wallpaper-preview.jpg");
+    width: 100vw;
+    height: 100vh;
+}
+.circle {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background-color: #A8E890;
+    position: fixed;
+    left: 48%;
+    right: auto;
+    top: 250px;
+}
+.text {
+    color: #425F57;
+}

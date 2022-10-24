@@ -1,0 +1,24 @@
+header{
+    background-color: #425F57;
+    display:flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 10%;
+}
+.links{
+    display: flex;
+    padding: 0%;
+    width: 33%;
+}
+li{
+    margin-left: 10%;
+    list-style-type: none;
+}
+.text{
+    color: #A8E890;
+}
+.sticky {
+    position: fixed;
+    top: 0;
+    width: 100%;
+  }

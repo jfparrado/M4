@@ -6,6 +6,9 @@
     height: 3rem;
     align-items: center;
     justify-content: center;
+}
+.title{
+    color: #A8E890;
 } 
 .imgcard{
     border-radius: 0.2rem;
