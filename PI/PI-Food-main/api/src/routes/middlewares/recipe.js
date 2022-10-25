@@ -65,4 +65,46 @@ router.post("/", async (req, res) => {
     res.status(401).send(error.message);
   }
 });
+
+// router.put("/:id", async function (req, res) {
+//   //modifica el nombre de una receta
+//   const { id } = req.params;
+//   const { name } = req.body;
+//   if (!id || !name) {
+//     const obj = {
+//       error:
+//         "No se recibieron los parámetros necesarios para modificar el Post",
+//     };
+//     return res.status(201).json(obj);
+//   }
+//   let todasRecetas = await getAllInfo();
+//   let matchs = todasRecetas.filter((arr) => arr.id === parseFloat(id));
+//   let index = todasRecetas.findIndex((arr) => arr.id === parseFloat(id));
+//   console.log("index es: ", index);
+//   if (matchs.length === 0) {
+//     const obj = {
+//       error: "No se recibieron id que concuerde con ninguno de las recipes",
+//     };
+//     return res.status(400).json(obj);
+//   }
+
+//   matchs[0].name = name;
+//   todasRecetas[index] = matchs[0];
+//   return res.status(200).json(todasRecetas[0]);
+// });
+
+// router.delete("/:id", async function (req, res) {
+//   const { id } = req.params;
+//   let todasRecetas = await getAllInfo();
+//   let index = todasRecetas.findIndex((arr) => arr.id === parseFloat(id));
+//   if (index === -1) {
+//     const obj = {
+//       error: "Mensaje de error",
+//     };
+//     return res.status(400).json(obj);
+//   }
+//   todasRecetas.splice(index, 1);
+//   return res.status(200).json({ success: true });
+// });
+
 module.exports = router;

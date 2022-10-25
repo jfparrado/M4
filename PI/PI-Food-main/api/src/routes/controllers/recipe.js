@@ -64,6 +64,7 @@ const getAllInfo = async () => {
 const getById = async (idReceta) => {
   try {
     const allInfo = await getAllInfo({
+      //aca toca traerlo todo porque pueden haber ids de api y ids de db
       include: { model: Diet },
     });
     const result = allInfo.filter(
