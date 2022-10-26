@@ -26,9 +26,9 @@ function App() {
         <Route path="/create_recipes">
           <CreateRecipes />
         </Route>
-        <Route path="*">
+        {/* <Route path="*">
           <PageNotFound />
-        </Route>
+        </Route> */}
       </Router>
     </div>
   );

@@ -44,9 +44,11 @@ export default function Home(){//props recibe la info que le llegue y se usa pro
     }
     function handleOrderer(event){
         event.preventDefault();
-        dispatch(getRecipesOrderedByName(event.target.value))//aca ordena las recipes
-        setCurrentPage(1)//aca me lleva la pag 1 luego de haber ordenado
-        setOrder(`Ordenado ${event.target.value}`)
+        if(event.target.value!=="All"){
+            dispatch(getRecipesOrderedByName(event.target.value))//aca ordena las recipes
+            setCurrentPage(1)//aca me lleva la pag 1 luego de haber ordenado
+            setOrder(`Ordenado ${event.target.value}`)
+        }
     }
     return(
         <div className={style.mainContainer}>
@@ -55,6 +57,7 @@ export default function Home(){//props recibe la info que le llegue y se usa pro
                 <div>
                     <Paginado recipesPerPage={recipesPerPage} numberOfRecipes={allRecipes.length} paginado={funcPaginado}/>
                     <select  onChange={(event)=>handleOrderer(event)}>
+                        <option value="All">Order By</option>
                         <option value="asc">Ascendent</option>
                         <option value="desc">Descendent</option>
                         <option value="health">Health Score</option>

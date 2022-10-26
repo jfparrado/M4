@@ -16,6 +16,16 @@ const initialState = {
   recipeDetail: [],
   diets: [],
 };
+const empty = [
+  {
+    name: "No recipe found",
+    summary: "No summary",
+    healthScore: 0,
+    steps: "No steps",
+    image:
+      "https://neilpatel.com/wp-content/uploads/2019/05/ilustracao-sobre-o-error-404-not-found.jpeg",
+  },
+];
 export default function rootReducer(state = initialState, action) {
   switch (action.type) {
     case GET_ALL_RECIPES:
@@ -26,7 +36,6 @@ export default function rootReducer(state = initialState, action) {
       };
 
     case GET_RECIPES_BY_ID:
-      console.log("estoy en reducers");
       return {
         ...state,
         recipeDetail: action.payload,
@@ -96,7 +105,7 @@ export default function rootReducer(state = initialState, action) {
 
     case GET_RECIPES_BY_DIET:
       const allRecipes = state.allRecipes;
-      const recipesByDiet =
+      let recipesByDiet =
         action.payload === "All" //si se ecogen todas
           ? allRecipes //traetelas todas
           : allRecipes.filter(
@@ -104,6 +113,7 @@ export default function rootReducer(state = initialState, action) {
                 recipe //sino solo lo que se escoja
               ) => recipe.diets.includes(action.payload)
             );
+      if (recipesByDiet.length === 0) recipesByDiet = empty;
       return {
         ...state,
         recipes: recipesByDiet,
@@ -119,10 +129,6 @@ export default function rootReducer(state = initialState, action) {
       return {
         ...state,
       };
-    // case POST_DIET:
-    //   return {
-    //     ...state,
-    //   };
     case GET_ALL_DIETS:
       return {
         ...state,

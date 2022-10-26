@@ -14,23 +14,20 @@ const getInfoApi = async () => {
     const recipeDiets = data?.map((recipe) => {
       return recipe.diets;
     });
-    // console.log(recipeDiets);
     let allDiets = [];
-    recipeDiets?.forEach((recipe) => {
-      recipe?.forEach((diet) => {
+    recipeDiets?.forEach((dietsInRecipe) => {
+      dietsInRecipe?.forEach((diet) => {
         if (allDiets.indexOf(diet) === -1) {
           allDiets.push(diet);
         }
       });
     });
-    // console.log("estamos aca:", allDiets);
     return allDiets; //este es un array con todas las recetas
   } catch (error) {
     throw new Error("El error es:", error);
   }
 };
 const getInfoDB = async () => {
-  //check
   try {
     const dbInfo = await Diet.findAll();
     const resultDiets = dbInfo.map((diet) => diet.dataValues);
@@ -62,7 +59,6 @@ const getAllDiets = async () => {
     const infoApi = await getInfoApi();
     const infoDB = await getInfoDB();
     const objetosDB = infoDB.map((diet) => diet.dataValues); // la bd se transforma obj
-    let sizeDB = infoDB.length;
     const arrayDB = infoDB.map((diet) => diet.name);
     const dietsNotIncludedInDB = infoApi.filter(
       //dietas unicas
@@ -76,7 +72,7 @@ const getAllDiets = async () => {
     const todas = await Diet.findAll(); // aca unimos las que trae la bd con aquellas que vienen del api y no estan en la bd
     return todas;
   } catch (error) {
-    console.log("El error es:", error);
+    throw new Error("El error es:", error.message);
   }
 };
 module.exports = { getInfoApi, getInfoDB, getAllDiets };

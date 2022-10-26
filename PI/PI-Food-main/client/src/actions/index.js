@@ -23,7 +23,6 @@ export function getAllRecipes() {
   };
 }
 export function getRecipesById(id) {
-  // console.log("el id es:", id);
   return async function (dispatch) {
     try {
       const oneRecipe = await axios.get(`http://localhost:3001/recipes/${id}`);
@@ -70,7 +69,6 @@ export function postRecipe(recipe) {
         `http://localhost:3001/recipes`,
         recipe
       );
-      console.log("la receta creada fue:", recipeCreated);
       return recipeCreated;
     } catch (error) {
       console.log(error);

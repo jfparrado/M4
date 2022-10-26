@@ -5,7 +5,7 @@ import { useEffect }from "react";
 import { useParams } from 'react-router-dom';
 import style from "./DetailRecipe.module.css"
 
-export default function DetailRecipe(){
+export default function  DetailRecipe(){
     const { id } = useParams();
     const dispatch =useDispatch()
     useEffect(()=>{//esta funcion es que quiero hacer cuando el componenete se monta o actualiza
@@ -16,7 +16,7 @@ export default function DetailRecipe(){
 
     return(
         <div>
-            {oneRecipe.length>0? //esto es pa que cuando no haya nada se muestre un loading
+            {oneRecipe.length>0 && oneRecipe[0].id===parseFloat(id)? //esto es pa que cuando no haya nada se muestre un loading
             <div className={style.containerContent}>
                 <h3>{oneRecipe[0].name}</h3>
                 <div className={style.allInfo}>

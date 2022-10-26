@@ -9,7 +9,6 @@ router.get("/:idReceta", async (req, res) => {
 
   try {
     const receta = await getById(idReceta);
-    // console.log("a la ruta llego:", receta);
     if (!receta) {
       return res.status(204).send("that id does not exist in the database");
     } else {
@@ -21,24 +20,34 @@ router.get("/:idReceta", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
+  const empty = [
+    {
+      name: "No recipe found",
+      summary: "No summary",
+      healthScore: 0,
+      steps: "No steps",
+      image:
+        "https://neilpatel.com/wp-content/uploads/2019/05/ilustracao-sobre-o-error-404-not-found.jpeg",
+    },
+  ];
   try {
     const { name } = req.query;
     let todasRecetas = await getAllInfo();
-
     if (name) {
+      if (todasRecetas.length === 0) todasRecetas = empty;
+
+      //en caso de que se busque por la searchbar
       let recetasFiltradas = todasRecetas.filter(
-        (
-          receta //cada receta
-        ) => receta.name.toLowerCase().includes(name.toLowerCase()) //va a buscar si es un su campo nombre(en minuscula) se encuentra la palabra del query (tambien en minuscula)
+        (receta) => receta.name.toLowerCase().includes(name.toLowerCase()) //va a buscar si es un su campo nombre(en minuscula) se encuentra la palabra del query (tambien en minuscula)
       );
       if (recetasFiltradas.length !== 0) {
         return res.status(200).send(recetasFiltradas);
       } else {
-        return res
-          .status(204)
-          .send("there is no recipe with that word on its name");
+        recetasFiltradas = empty;
+        return res.status(204).send(recetasFiltradas);
       }
     } else {
+      //cuando no hay nada en el searchbar que mande todo
       res.status(200).send(todasRecetas);
     }
   } catch (error) {
@@ -47,9 +56,9 @@ router.get("/", async (req, res) => {
 });
 router.post("/", async (req, res) => {
   try {
-    const { id, name, summary, healthScore, steps, image, dishTypes, diets } =
+    const { name, summary, healthScore, steps, image, dishTypes, diets } =
       req.body;
-    const cuerpo = { id, name, summary, healthScore, steps, image, dishTypes };
+    const cuerpo = { name, summary, healthScore, steps, image, dishTypes };
     if (!name || !summary || !healthScore || !steps) {
       return res.status(404).send("Falta enviar datos obligatorios");
     }
@@ -59,7 +68,6 @@ router.post("/", async (req, res) => {
     const newRecipe = await Recipe.create(cuerpo);
     newRecipe.addDiet(dietInfo);
     const result = await Recipe.findAll();
-    console.log(result);
     res.status(201).json(result); //201 es que fue creado
   } catch (error) {
     res.status(401).send(error.message);
@@ -68,29 +76,16 @@ router.post("/", async (req, res) => {
 
 // router.put("/:id", async function (req, res) {
 //   //modifica el nombre de una receta
-//   const { id } = req.params;
-//   const { name } = req.body;
-//   if (!id || !name) {
-//     const obj = {
-//       error:
-//         "No se recibieron los parámetros necesarios para modificar el Post",
-//     };
-//     return res.status(201).json(obj);
+//   try {
+//     const { id } = req.params;
+//     const objRecipe = req.body;
+//     const putValue = await Recipe.findByPk(id);
+//     await putValue.set(objRecipe);
+//     await putValue.save();
+//     res.status(200).send(putValue);
+//   } catch (error) {
+//     res.status(404).send(error);
 //   }
-//   let todasRecetas = await getAllInfo();
-//   let matchs = todasRecetas.filter((arr) => arr.id === parseFloat(id));
-//   let index = todasRecetas.findIndex((arr) => arr.id === parseFloat(id));
-//   console.log("index es: ", index);
-//   if (matchs.length === 0) {
-//     const obj = {
-//       error: "No se recibieron id que concuerde con ninguno de las recipes",
-//     };
-//     return res.status(400).json(obj);
-//   }
-
-//   matchs[0].name = name;
-//   todasRecetas[index] = matchs[0];
-//   return res.status(200).json(todasRecetas[0]);
 // });
 
 // router.delete("/:id", async function (req, res) {
